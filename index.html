@@ -82,14 +82,14 @@
                         <h1 class="text-2xl font-fifa font-black tracking-tight text-white uppercase italic">
                             CENTRAL DE <span class="text-[#02ef8b]">SCOUTING</span> AI
                         </h1>
-                        <p class="text-slate-400 text-[11px] uppercase tracking-widest font-semibold">Ultimate Team Database Analyst</p>
+                        <p class="text-slate-400 text-[11px] uppercase tracking-widest font-semibold">Analista de Banco de Dados</p>
                     </div>
                 </div>
                 
                 <div class="bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl flex items-center gap-3 self-start sm:self-auto">
                     <div class="w-2.5 h-2.5 rounded-full bg-[#02ef8b] animate-ping"></div>
                     <div class="text-left">
-                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Tactical Engine</p>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Modelo Utilizado</p>
                         <p class="text-xs font-fifa font-bold text-slate-300 tracking-wide">GEMINI 3.1 FLASH LITE</p>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="mb-5">
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Esquema Tático (Squad Formation)</label>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Esquema Tático</label>
                         <div class="relative">
                             <select id="minha-formacao" required class="w-full px-3 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:border-[#02ef8b] focus:outline-none text-sm font-fifa font-bold text-white uppercase tracking-wider cursor-pointer appearance-none">
                                 <option value="4-3-3">🟢 4-3-3 (Padrão FC Ofensivo)</option>
@@ -136,7 +136,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Atributos & Defeitos Observados (Scout Report)</label>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Atributos & Defeitos Observados</label>
                         <div id="inputs-container" class="space-y-3">
                             <div class="relative transition-all duration-200 fc-border rounded-xl overflow-hidden bg-slate-900/90">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-xs font-fifa font-bold text-[#02ef8b]">ATT 01</span>
@@ -155,7 +155,7 @@
 
                     <div class="mt-6 pt-4 border-t border-slate-800 flex gap-3">
                         <button type="submit" id="btn-enviar" class="flex-1 bg-[#02ef8b] hover:bg-[#02d87d] text-black font-fifa font-black uppercase tracking-wider py-3.5 px-6 rounded-xl shadow-lg active:scale-[0.98] transform transition-all duration-150 flex justify-center items-center gap-2 italic text-sm">
-                            <span>GERAR ANALYTICS</span>
+                            <span>GERAR ANALISE</span>
                             <div id="loading-spinner" class="hidden w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
                         </button>
                         
@@ -200,14 +200,14 @@
 
                             <div class="bg-gradient-to-r from-slate-950 to-slate-900 border border-slate-800 p-5 rounded-xl">
                                 <h4 class="text-[10px] font-fifa font-bold text-[#02ef8b] uppercase tracking-widest flex items-center gap-1.5 italic">
-                                    📊 TAXA DE COMPATIBILIDADE SQUAD (TACTICAL FIT)
+                                    📊 TAXA DE COMPATIBILIDADE COM O TIME
                                 </h4>
                                 <p id="scout-encaixe-time" class="text-sm text-slate-300 leading-relaxed mt-2"></p>
                             </div>
 
                             <div>
                                 <h3 class="text-[10px] font-fifa font-bold text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                    ⭐ PLAYSTYLES & VALÊNCIAS DE CAMPO
+                                    ⭐ QUALIDADES & VALÊNCIAS EM CAMPO
                                 </h3>
                                 <ul id="scout-caracteristicas-chave" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-300 list-none">
                                 </ul>
@@ -223,7 +223,7 @@
 
                             <div class="bg-[#02ef8b]/5 border border-[#02ef8b]/20 p-5 rounded-xl">
                                 <h4 class="text-[10px] font-fifa font-bold text-[#02ef8b] uppercase tracking-widest mb-2 flex items-center gap-1.5 italic">
-                                    🎯 INSTRUÇÕES DO MANAGER (PLANO DE AÇÃO)
+                                    🎯 INSTRUÇÕES DO TECNICO
                                 </h4>
                                 <p id="scout-como-agir" class="text-sm text-slate-200 leading-relaxed font-semibold"></p>
                             </div>
