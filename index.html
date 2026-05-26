@@ -12,14 +12,13 @@
     <style>
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #0b0e14; /* Deep Carbon FC Base */
+            background-color: #0b0e14; 
         }
         
         .font-fifa {
             font-family: 'Barlow Condensed', sans-serif;
         }
         
-        /* Textura geométrica de fundo do menu do FIFA/FC */
         .bg-fc-tactical {
             background-color: #0b0e14;
             background-image: 
@@ -49,7 +48,6 @@
             animation: cardIntro 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
         }
 
-        /* Neon EA FC Lime/Cyan */
         .fc-border {
             border: 1px solid rgba(2, 239, 139, 0.15);
         }
@@ -129,9 +127,9 @@
                     </div>
 
                     <div class="mb-5">
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Modelo & Instruções de Jogo Coletivo</label>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Modelo & Instruções de Jogo Coletivo (Adversário)</label>
                         <div class="relative transition-all duration-200 fc-border rounded-xl overflow-hidden bg-slate-900/90">
-                            <textarea id="estilo-time-input" rows="3" placeholder="Ex: Custom tática baseada em posse de bola agressiva, tiki-taka curto, ultrapassagem dos laterais e pressão imediata após perda de bola." class="w-full px-4 py-2.5 bg-transparent text-xs text-slate-300 focus:outline-none resize-none placeholder-slate-600 font-medium"></textarea>
+                            <textarea id="estilo-time-input" rows="3" placeholder="Ex: FC Bayern München — posse de bola agressiva, tiki-taka curto e pressão imediata após perda." class="w-full px-4 py-2.5 bg-transparent text-xs text-slate-300 focus:outline-none resize-none placeholder-slate-600 font-medium"></textarea>
                         </div>
                     </div>
 
@@ -194,6 +192,13 @@
                                     <span class="text-[10px] font-fifa font-bold text-slate-400 uppercase tracking-widest">POSIÇÃO PRINCIPAL:</span>
                                     <span id="scout-card-pos" class="text-sm font-fifa font-bold text-black bg-[#02ef8b] px-3 py-0.5 rounded italic">ST</span>
                                 </div>
+                            </div>
+
+                            <div class="bg-gradient-to-r from-red-950/50 to-slate-950 border border-red-500/30 p-5 rounded-xl">
+                                <h4 class="text-[10px] font-fifa font-bold text-red-400 uppercase tracking-widest flex items-center gap-1.5 italic">
+                                    🛡️ ANÁLISE DE CONTRATÁTICA RECOMENDADA
+                                </h4>
+                                <p id="scout-tatica-contra" class="text-sm text-white leading-relaxed mt-2 font-bold"></p>
                             </div>
 
                             <p id="scout-estilo-jogo" class="text-slate-300 text-sm leading-relaxed border-l-4 border-[#02ef8b] pl-4 italic bg-slate-950/40 py-3 pr-3 rounded-r-xl"></p>
@@ -274,7 +279,7 @@
             const totalInputs = containerInputs.querySelectorAll('.caracteristica-input').length + 1;
             
             const wrapper = document.createElement('div');
-            wrapper.className = 'flex gap-2 items-center opacity-0 transform translate-y-2 transition-all duration-300 relative fc-border rounded-xl overflow-hidden bg-slate-900/90';
+            wrapper.className = 'flex gap-2 items-center opacity-0 transform translate-y-2 transition-all duration-300 relative fc-border rounded-xl overflow-hidden bg-slate-900/90 w-full';
             
             const numSpan = document.createElement('span');
             numSpan.className = 'absolute inset-y-0 left-0 flex items-center pl-3.5 text-xs font-fifa font-bold text-[#02ef8b] select-none';
@@ -283,6 +288,7 @@
             const novoInput = document.createElement('input');
             novoInput.type = 'text';
             novoInput.placeholder = `Atributo ou Comportamento ${totalInputs}`;
+            novoInput.required = true;
             novoInput.className = 'caracteristica-input w-full pl-14 pr-10 py-3 bg-transparent text-sm text-slate-200 focus:outline-none placeholder-slate-700';
             
             const btnDeletar = document.createElement('button');
@@ -370,13 +376,13 @@
         function exibirRelatorioAtleta(scout) {
             placeholderScout.classList.add('hidden');
             
-            // Dados da Ficha Técnica
             document.getElementById('scout-nome-jogador').innerText = scout.nome_do_jogador;
             document.getElementById('scout-estilo-jogo').innerText = scout.estilo_de_jogo_individual;
             document.getElementById('scout-encaixe-time').innerText = scout.encaixe_no_estilo_da_equipe;
             document.getElementById('scout-card-pos').innerText = scout.posicao_principal.toUpperCase();
+            
+            document.getElementById('scout-tatica-contra').innerText = scout.tatica_contra_alvo;
 
-            // Renderizar Características Chave (PlayStyles)
             const ulChave = document.getElementById('scout-caracteristicas-chave');
             ulChave.innerHTML = "";
             scout.caracteristicas_chave.forEach(item => {
@@ -386,7 +392,6 @@
                 ulChave.appendChild(li);
             });
 
-            // Renderizar Versatilidade (Alt Positions)
             const divVersatilidade = document.getElementById('scout-versatilidade');
             divVersatilidade.innerHTML = "";
             scout.versatilidade_e_funcoes.forEach(funcao => {
@@ -396,20 +401,19 @@
                 divVersatilidade.appendChild(span);
             });
 
-            // Plano de Ação
             document.getElementById('scout-como-agir').innerText = scout.como_utilizar_ou_marcar;
 
             resultadoContainer.classList.remove('hidden');
         }
 
         function mostrarErro(mensagem) {
-            errorText.innerText = mensagem;
+            errorText.innerText = mensaje;
             errorContainer.classList.remove('hidden');
         }
 
         function compartilharWhatsApp() {
             if (!scoutAtual) return;
-            const texto = `🎮 *FC SCOUT AI REPORT* \n\n🏃‍♂️ *Atleta:* ${scoutAtual.nome_do_jogador}\n📋 *Posição:* ${scoutAtual.posicao_principal}\n🔮 *Perfil Técnico:* ${scoutAtual.estilo_de_jogo_individual}\n📊 *Tactical Fit:* ${scoutAtual.encaixe_no_estilo_da_equipe}`;
+            const texto = `🎮 *FC SCOUT AI REPORT* \n\n🏃‍♂️ *Atleta:* ${scoutAtual.nome_do_jogador}\n📋 *Recomendação:* ${scoutAtual.tatica_contra_alvo}`;
             const urlCompartilhar = `https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`;
             window.open(urlCompartilhar, '_blank');
         }
@@ -420,7 +424,7 @@
             const chaveStr = scoutAtual.caracteristicas_chave.map(i => `◆ ${i}`).join('\n');
             const funcoesStr = scoutAtual.versatilidade_e_funcoes.map(f => `• ${f}`).join('\n');
             
-            const textoCompleto = `🎮 REPORT OFICIAL DE SCOUTING — FC SQUAD ANALYST\n🏃‍♂️ Jogador: ${scoutAtual.nome_do_jogador}\n📌 Posição Principal: ${scoutAtual.posicao_principal}\n🔮 Perfil Geral: ${scoutAtual.estilo_de_jogo_individual}\n📊 Tactical Fit Coletivo: ${scoutAtual.encaixe_no_estilo_da_equipe}\n\n⭐ PLAYSTYLES COLETADOS:\n${chaveStr}\n\n🔄 POSIÇÕES ALTERNATIVAS:\n${funcoesStr}\n\n📋 INSTRUÇÕES DO MANAGER:\n${scoutAtual.como_utilizar_ou_marcar}`;
+            const textoCompleto = `🎮 REPORT OFICIAL DE SCOUTING — FC SQUAD ANALYST\n🏃‍♂️ Alvo: ${scoutAtual.nome_do_jogador}\n🛡️ Contratática Recomendada: ${scoutAtual.tatica_contra_alvo}\n🔮 Perfil Geral: ${scoutAtual.estilo_de_jogo_individual}\n📊 Tactical Fit Coletivo: ${scoutAtual.encaixe_no_estilo_da_equipe}\n\n⭐ PLAYSTYLES COLETADOS:\n${chaveStr}\n\n📋 INSTRUÇÕES DO MANAGER:\n${scoutAtual.como_utilizar_ou_marcar}`;
 
             navigator.clipboard.writeText(textoCompleto).then(() => {
                 const btnText = document.getElementById('btn-copiar-text');
@@ -433,15 +437,13 @@
 
         function reiniciarFormulario() {
             scoutAtual = null;
-            document.getElementById('nome-jogador-input').value = "";
-            document.getElementById('minha-formacao').selectedIndex = 0;
-            document.getElementById('estilo-time-input').value = "";
+            document.getElementById('scout-form').reset();
             containerInputs.innerHTML = `
-                <div class="relative transition-all duration-200 fc-border rounded-xl overflow-hidden bg-slate-900/90">
+                <div class="relative transition-all duration-200 fc-border rounded-xl overflow-hidden bg-slate-900/90 w-full">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-xs font-fifa font-bold text-[#02ef8b] select-none">ATT 01</span>
                     <input type="text" placeholder="Ex: Ritmo absurdo nas pontas, excelente drible ágil" required class="caracteristica-input w-full pl-14 pr-4 py-3 bg-transparent text-sm text-slate-200 focus:outline-none placeholder-slate-600">
                 </div>
-                <div class="relative transition-all duration-200 fc-border rounded-xl overflow-hidden bg-slate-900/90">
+                <div class="relative transition-all duration-200 fc-border rounded-xl overflow-hidden bg-slate-900/90 w-full">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-xs font-fifa font-bold text-[#02ef8b] select-none">ATT 02</span>
                     <input type="text" placeholder="Ex: Finalização de trivela, fôlego de jogo baixo" required class="caracteristica-input w-full pl-14 pr-4 py-3 bg-transparent text-sm text-slate-200 focus:outline-none placeholder-slate-600">
                 </div>
